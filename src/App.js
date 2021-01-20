@@ -1,8 +1,8 @@
-// import logo from './logo.svg';
 import './App.css';
-import Calculator from './calc/Calculator'
-import NumberProvider from './calc/NumberProvider'
+// import Calculator from './calc/Calculator'
+// import NumberProvider from './calc/NumberProvider'
+import ToDoInput from'./todo/ToDoInput'
 
-const App = () => (<NumberProvider><Calculator/></NumberProvider>)
+const App = () => ( <ToDoInput/> )
 
 export default App;
