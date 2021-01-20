@@ -1,8 +1,8 @@
-import React, {useContext} from 'react'
+import React, { useContext } from 'react'
 import { NumberContext } from './NumberProvider'
 
 const BackButton = () => {
-    const {} = useContext( NumberContext )
+    const { handleBackButton } = useContext( NumberContext )
     return (
         <button type="button" className="white-button" onClick = {
             () => handleBackButton()

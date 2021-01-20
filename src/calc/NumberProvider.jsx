@@ -4,7 +4,7 @@ export const NumberContext = React.createContext()
 
 const NumberProvider = props => {
     const [ number, setNumber ] = useState('')
-    const [ storeNumber, setStoreNumber ] = useState('')
+    const [ storedNumber, setStoredNumber ] = useState('')
     const [ functionType, setFunctionType ] = useState('')
     
     const handleSetDisplayValue = num => {
@@ -22,22 +22,69 @@ const NumberProvider = props => {
     
     const handleClearValue = () => {
         setNumber('')
-        setStoreNumber('')
+        setStoredNumber('')
         setFunctionType('')
     }
 
-    const handleEqualValue = () => {
-
+    const doMatch = () => {
+        if(number && storedNumber) {
+            switch(functionType) {
+                case '+':
+                    setStoredNumber(`${Math.round(`${parseFloat(storedNumber) + parseFloat(number) * 100}`) / 100}`)
+                    break
+                case '-':
+                    setStoredNumber(`${Math.round(`${parseFloat(storedNumber) - parseFloat(number) * 100}`) / 100}`)
+                    break
+                case '*':
+                    setStoredNumber(`${Math.round(`${parseFloat(storedNumber) * parseFloat(number) * 100}`) / 100}`)
+                    break
+                case '/':
+                    setStoredNumber(`${Math.round(`${parseFloat(storedNumber) / parseFloat(number) * 100}`) / 100}`)
+                    break
+                default: break
+            }
+            setNumber('')
+            setFunctionType('')
+        }
     }
 
-    const handleNegativeValue = () => {
-        const negativeNumber = number * -1
-        setNumber(negativeNumber)
+    const handleToggleNegative = () => {
+        if(number) {
+            if(number > 0) {
+                setNumber(`-${number}`)
+            }else {
+                const positiveNumber = number.slice(1)
+                setNumber(positiveNumber)
+            }
+        }else if(storedNumber > 0) {
+            setStoredNumber(`-${storedNumber}`)
+        }else {
+            const positiveNumber = storedNumber.slice(1)
+            setStoredNumber(positiveNumber)
+        }
     }
 
-    return (<NumberContext.Provider>
-        value = {{ handleSetDisplayValue, handleBackButton, handleClearValue, 
-                   handleEqualValue, handleNegativeValue }}
+    const handleSetStoredValue = () => {
+        setStoredNumber(number)
+        setNumber('')
+    }
+
+    const handleSetCalcFuntion = type => {
+        if(number) {
+            setFunctionType(type)
+            handleSetStoredValue()
+        }
+        if(storedNumber) {
+            setFunctionType(type)
+        }
+    }
+
+    return (<NumberContext.Provider
+        value = {{ handleSetDisplayValue, handleBackButton, handleClearValue, doMatch, 
+                   handleToggleNegative, handleSetStoredValue, handleSetCalcFuntion,
+                   number, storedNumber, functionType, setNumber}}
+                   >
+                       { props.children }
     </NumberContext.Provider>)
 }
 

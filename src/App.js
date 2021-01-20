@@ -1,14 +1,8 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+import Calculator from './calc/Calculator'
+import NumberProvider from './calc/NumberProvider'
 
-const App = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        안녕 리액트 !
-      </header>
-    </div>
-  );
-}
+const App = () => (<NumberProvider><Calculator/></NumberProvider>)
 
 export default App;

@@ -2,9 +2,9 @@ import React, { useContext } from 'react'
 import { NumberContext } from './NumberProvider'
 
 const EqualButton = () => {
-    const { handleEqualValue } = useContext( NumberContext )
+    const { doMatch } = useContext( NumberContext )
     return (<button type="button" className="white-button" onClick = {
-        () => handleEqualValue()
+        () => doMatch()
     }>
         =
     </button>)
