@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { NumberContext } from './NumberProvider'
 import { DisplayStyles} from './styles/Style'
 
-const Display = () => {
+export default function Display() {
     const { number, storedNumber, functionType } = useContext( NumberContext )
     return (<DisplayStyles>
         <h2 className = { storedNumber && storedNumber.length > 12 ? 'long-main-display' : undefined }>
@@ -13,5 +13,3 @@ const Display = () => {
         </p>
     </DisplayStyles>)
 }
-
-export default Display

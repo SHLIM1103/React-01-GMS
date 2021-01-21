@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { NumberContext } from './NumberProvider'
 
 
-const NegativeButton = () => {
+export default function NegativeButton() {
     const { handleToggleNegative } = useContext( NumberContext )
     return (<button type="button" className="white-button" onClick = {
         () => handleToggleNegative()
@@ -10,5 +10,3 @@ const NegativeButton = () => {
         +/-
     </button>)
 }
-
-export default NegativeButton
